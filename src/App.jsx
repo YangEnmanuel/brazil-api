@@ -1,10 +1,10 @@
-import CEP from './CEP'
+import AddressFinder from "./AddressFinder"
 
 function App() {
 
   return (
     <>
-      <CEP />
+      <AddressFinder />
     </>
   )
 }

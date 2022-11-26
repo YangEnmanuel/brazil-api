@@ -5,7 +5,7 @@ import axios from 'axios'
 import './styles.css'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
-export default function AddressByCEP() {
+export default function AddressFinder() {
   const [cep, setCep] = useState('')
   const [cepIsValid, setCepIsValid] = useState(false)
   const [address, setAddress] = useState({})
