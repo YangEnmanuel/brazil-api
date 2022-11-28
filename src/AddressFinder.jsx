@@ -30,7 +30,7 @@ export default function AddressFinder() {
     const res = await axios.get(`https://brasilapi.com.br/api/cep/v2/${cep}`)
     setAddress(res.data)
 
-    // Some CEPs doesn't have specific coordinates 
+    // Some CEPs doesn't have specific coordinates
     if (Object.keys(res.data.location.coordinates).length === 0) {
       alert('The given CEP does not provides a registered street')
     } else {
@@ -43,7 +43,7 @@ export default function AddressFinder() {
 
   return (
     <>
-      <h1>CEP Finder</h1>
+      <h1>Address Finder</h1>
       <form action='get' onSubmit={submitHandler}>
         <input
           required
@@ -63,7 +63,8 @@ export default function AddressFinder() {
           <p>Type a CEP!</p>
         ) : (
           <p>
-            {address.street}, {address.neighborhood}, {address.city}
+            {address.street ? address.street : '?'},
+            {address.neighborhood ? address.neighborhood : '?'},{address.city}
           </p>
         )}
       </div>
