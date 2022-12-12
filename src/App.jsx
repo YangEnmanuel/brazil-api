@@ -4,8 +4,8 @@ import CEPFinder from './CEPFinder'
 function App() {
   return (
     <>
-      {/* <AddressFinder /> */}
-      <CEPFinder />
+      <AddressFinder />
+      {/* <CEPFinder /> */}
     </>
   )
 }
