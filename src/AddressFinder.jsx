@@ -67,6 +67,8 @@ export default function AddressFinder() {
           </h1>
           <p className='mb-8 leading-relaxed'>
             Type a valid CEP number to know exactly the position in the map
+            <br />
+             Ex: 88117750
           </p>
           <form
             action='get'
@@ -90,12 +92,12 @@ export default function AddressFinder() {
               disabled={cepIsValid ? false : true}
               className='inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg'
             >
-              Search
+              🔍
             </button>
           </form>
 
           {Object.keys(address).length === 0 ? (
-            <p>Type a CEP!</p>
+            <p className='mt-3'>The address will apear here ....</p>
           ) : (
             <p className='mt-3'>
               {address.street ? address.street : '?'},
