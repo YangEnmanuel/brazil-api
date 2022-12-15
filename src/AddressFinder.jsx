@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Map, { Marker, NavigationControl } from 'react-map-gl'
 import axios from 'axios'
 
-import './styles.css'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
 export default function AddressFinder() {
@@ -42,11 +41,11 @@ export default function AddressFinder() {
   }
 
   return (
-    <section className='text-gray-600 body-font'>
-      <div className='container mx-auto flex px-5 py-24 md:flex-row flex-col items-center'>
+    <section className='text-gray-600 body-font flex'>
+      <div className='mx-auto flex px-5 py-24 md:flex-row flex-col items-center'>
         <div
-          className='lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0'
-          style={{ width: '600px', height: '400px' }}
+          className=' md:w-1/2 w-5/6 mb-10 md:mb-0'
+          style={{ width: '700px', height: '500px' }}
         >
           <Map
             {...coordinates}

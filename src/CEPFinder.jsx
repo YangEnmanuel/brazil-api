@@ -34,8 +34,9 @@ export default function CEPFinder() {
   }
 
   return (
-    <>
-      <div>CEP Finder</div>
+    
+    <section className=''>
+      <h1 className='title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900'>Don't know your CEP ?</h1>
 
       <form style={{ padding: '20px' }} onSubmit={handleSubmit}>
         <label htmlFor='state'>State: </label>
@@ -146,6 +147,6 @@ export default function CEPFinder() {
           )}
         </div>
       )}
-    </>
+    </section>
   )
 }
