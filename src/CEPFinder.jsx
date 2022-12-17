@@ -34,119 +34,158 @@ export default function CEPFinder() {
   }
 
   return (
-    
     <section className=''>
-      <h1 className='title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900'>Don't know your CEP ?</h1>
-
-      <form style={{ padding: '20px' }} onSubmit={handleSubmit}>
-        <label htmlFor='state'>State: </label>
-        <select id='state' name='state' onChange={handleChange}>
-          <option value='AC'>Acre</option>
-          <option value='AL'>Alagoas</option>
-          <option value='AP'>Amapá</option>
-          <option value='AM'>Amazonas</option>
-          <option value='BA'>Bahia</option>
-          <option value='CE'>Ceará</option>
-          <option value='DF'>Distrito Federal</option>
-          <option value='ES'>Espírito Santo</option>
-          <option value='GO'>Goiás</option>
-          <option value='MA'>Maranhão</option>
-          <option value='MT'>Mato Grosso</option>
-          <option value='MS'>Mato Grosso do Sul</option>
-          <option value='MG'>Minas Gerais</option>
-          <option value='PA'>Pará</option>
-          <option value='PB'>Paraíba</option>
-          <option value='PR'>Paraná</option>
-          <option value='PE'>Pernambuco</option>
-          <option value='PI'>Piauí</option>
-          <option value='RJ'>Rio de Janeiro</option>
-          <option value='RN'>Rio Grande do Norte</option>
-          <option value='RS'>Rio Grande do Sul</option>
-          <option value='RO'>Rondônia</option>
-          <option value='RR'>Roraima</option>
-          <option value='SC'>Santa Catarina</option>
-          <option value='SP'>São Paulo</option>
-          <option value='SE'>Sergipe</option>
-          <option value='TO'>Tocantins</option>
-        </select>
-
+      <div className=''>
         <div className=''>
-          <label htmlFor='city'>City: </label>
-          <input type='text' name='city' onChange={handleChange} required />
-        </div>
+          <h1 className=''>Don't know your CEP ?</h1>
 
-        <div className=''>
-          <label htmlFor='neighborhood'>Neighborhood</label>
-          <input
-            type='text'
-            name='neighborhood'
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className=''>
-          <label htmlFor='street'>Street: </label>
-          <input type='text' name='street' onChange={handleChange} required />
-        </div>
-
-        <div className=''>
-          <label htmlFor='number'>Number</label>
-          <input type='number' name='number' onChange={handleChange} />
-        </div>
-
-        <input type='submit' value='Find my CEP' />
-      </form>
-
-      {possibleAddresses.length === 0 ? (
-        ''
-      ) : (
-        <div>
-          <h3>Best match:</h3>
-          <p>CEP: {goodAddress.cep}</p>
-          <p>Street: {goodAddress.street}</p>
-          <p>Neighborhood: {goodAddress.neighborhood}</p>
-          <p>City: {goodAddress.city}</p>
-
-          {possibleAddresses.length === 1 ? (
-            <p></p>
-          ) : (
+          <form onSubmit={handleSubmit} className=''>
             <div className=''>
-              <h3>Others similar:</h3>
-              <table>
-                <thead>
-                  <tr>
-                    <th>CEP</th>
-                    <th>Street</th>
-                    <th>Neighborhood</th>
-                    <th>City</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {/* <tr>
-                    <td>88117-750</td>
-                    <td>Rua Fulvio Vieira da Rosa</td>
-                    <td>Barreiros</td>
-                    <td>Sao Jose</td>
-                  </tr> */}
-                  {possibleAddresses.map((address, i) => {
-                    if (i > 10) null
-                    else return (
-                      <tr key={i}>
-                        <td>{address.cep}</td>
-                        <td>{address.street}</td>
-                        <td>{address.neighborhood}</td>
-                        <td>{address.city}</td>
-                      </tr>
-                      )
-                  })}
-                </tbody>
-              </table>
+              <label htmlFor='state'>State: </label>
+              <select
+                id='state'
+                name='state'
+                onChange={handleChange}
+                className=''
+              >
+                <option value='AC'>Acre</option>
+                <option value='AL'>Alagoas</option>
+                <option value='AP'>Amapá</option>
+                <option value='AM'>Amazonas</option>
+                <option value='BA'>Bahia</option>
+                <option value='CE'>Ceará</option>
+                <option value='DF'>Distrito Federal</option>
+                <option value='ES'>Espírito Santo</option>
+                <option value='GO'>Goiás</option>
+                <option value='MA'>Maranhão</option>
+                <option value='MT'>Mato Grosso</option>
+                <option value='MS'>Mato Grosso do Sul</option>
+                <option value='MG'>Minas Gerais</option>
+                <option value='PA'>Pará</option>
+                <option value='PB'>Paraíba</option>
+                <option value='PR'>Paraná</option>
+                <option value='PE'>Pernambuco</option>
+                <option value='PI'>Piauí</option>
+                <option value='RJ'>Rio de Janeiro</option>
+                <option value='RN'>Rio Grande do Norte</option>
+                <option value='RS'>Rio Grande do Sul</option>
+                <option value='RO'>Rondônia</option>
+                <option value='RR'>Roraima</option>
+                <option value='SC'>Santa Catarina</option>
+                <option value='SP'>São Paulo</option>
+                <option value='SE'>Sergipe</option>
+                <option value='TO'>Tocantins</option>
+              </select>
             </div>
-          )}
+
+            <div className=''>
+              <label htmlFor='city'>City: </label>
+              <input
+                type='text'
+                name='city'
+                onChange={handleChange}
+                required
+                className=''
+              />
+            </div>
+
+            <div className=''>
+              <label htmlFor='neighborhood'>Neighborhood</label>
+              <input
+                type='text'
+                name='neighborhood'
+                onChange={handleChange}
+                required
+                className=''
+              />
+            </div>
+
+            <div className=''>
+              <label htmlFor='street'>Street: </label>
+              <input
+                type='text'
+                name='street'
+                onChange={handleChange}
+                required
+                className=''
+              />
+            </div>
+
+            <div className=''>
+              <label htmlFor='number'>Number</label>
+              <input
+                type='number'
+                name='number'
+                onChange={handleChange}
+                className=''
+              />
+            </div>
+
+            <input type='submit' value='Find my CEP' className='' />
+          </form>
         </div>
-      )}
+
+        {possibleAddresses.length === 0 ? (
+          <div className='w-1/2'></div>
+        ) : (
+          <div className=''>
+            <h2 className=''>✨ Best match:</h2>
+            <p>CEP: {goodAddress.cep}</p>
+            <p>Street: {goodAddress.street}</p>
+            <p>Neighborhood: {goodAddress.neighborhood}</p>
+            <p>City: {goodAddress.city}</p>
+
+            {possibleAddresses.length === 1 ? (
+              <p></p>
+            ) : (
+              <div className=''>
+                <h3 className=''>🔎 Others similar:</h3>
+                <table className=''>
+                  <thead className=''>
+                    <tr>
+                      <th scope='col' className=''>
+                        CEP
+                      </th>
+                      <th scope='col' className=''>
+                        Street
+                      </th>
+                      <th scope='col' className=''>
+                        Neighborhood
+                      </th>
+                      <th scope='col' className=''>
+                        City
+                      </th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    {possibleAddresses.map((address, i) => {
+                      if (i > 10) null
+                      else
+                        return (
+                          <tr key={i} className=''>
+                            <td scope='col' className=''>
+                              {address.cep}
+                            </td>
+                            <td scope='col' className=''>
+                              {address.street}
+                            </td>
+                            <td scope='col' className=''>
+                              {address.neighborhood}
+                            </td>
+                            <td scope='col' className=''>
+                              {address.city}
+                            </td>
+                          </tr>
+                        )
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </section>
   )
 }
