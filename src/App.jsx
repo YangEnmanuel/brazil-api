@@ -1,7 +1,7 @@
 import AddressFinder from './AddressFinder'
 import CEPFinder from './CEPFinder'
 
-import './styles.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
   return (
