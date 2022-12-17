@@ -41,12 +41,12 @@ export default function AddressFinder() {
   }
 
   return (
-    <section className='text-gray-600 body-font flex'>
-      <div className='mx-auto flex px-5 py-24 md:flex-row flex-col items-center'>
+    <section className=''>
+      <div className=''>
         <div
-          className=' md:w-1/2 w-5/6 mb-10 md:mb-0'
-          style={{ width: '700px', height: '500px' }}
-        >
+          className=' '
+      style={{width: '500px', height: '500px'}}
+       >
           <Map
             {...coordinates}
             onMove={(e) => setCoordinates(e.viewState)}
@@ -60,11 +60,11 @@ export default function AddressFinder() {
           </Map>
         </div>
 
-        <div className='lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center'>
-          <h1 className='title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900'>
+        <div className=''>
+          <h1 className=''>
             Address Finder
           </h1>
-          <p className='mb-8 leading-relaxed'>
+          <p className=''>
             Type a valid CEP number to know exactly the position in the map
             <br />
              Ex: 88117750
@@ -72,13 +72,13 @@ export default function AddressFinder() {
           <form
             action='get'
             onSubmit={submitHandler}
-            className='flex w-full md:justify-start justify-center items-end'
+            className=''
           >
-            <div className='relative mr-4 lg:w-full xl:w-1/2 w-2/4'>
+            <div className=''>
               {/* <label htmlFor='cep' className='leading-7 text-sm text-gray-600'> Type a CEP </label> */}
 
               <input
-                className='w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:ring-2 focus:ring-indigo-200 focus:bg-transparent focus:border-indigo-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
+                className=''
                 required
                 type='text'
                 name='cep'
@@ -89,16 +89,16 @@ export default function AddressFinder() {
             <button
               type='submit'
               disabled={cepIsValid ? false : true}
-              className='inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg'
+              className=''
             >
               🔍
             </button>
           </form>
 
           {Object.keys(address).length === 0 ? (
-            <p className='mt-3'>The address will apear here ....</p>
+            <p className=''>The address will apear here ....</p>
           ) : (
-            <p className='mt-3'>
+            <p className=''>
               {address.street ? address.street : '?'},
               {address.neighborhood ? address.neighborhood : '?'},{' '}
               {address.city}
