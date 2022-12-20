@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import Map, { Marker, NavigationControl } from 'react-map-gl'
 import axios from 'axios'
 
+import { Container, Row, Col, Form, Button, FormControl } from 'react-bootstrap'
+
 import 'mapbox-gl/dist/mapbox-gl.css'
 
 export default function AddressFinder() {
@@ -41,12 +43,9 @@ export default function AddressFinder() {
   }
 
   return (
-    <section className=''>
-      <div className=''>
-        <div
-          className=' '
-      style={{width: '500px', height: '500px'}}
-       >
+    <Container>
+      <Row className='align-items-center p-5'>
+        <Col style={{ width: '500px', height: '500px' }}>
           <Map
             {...coordinates}
             onMove={(e) => setCoordinates(e.viewState)}
@@ -58,54 +57,53 @@ export default function AddressFinder() {
             )}
             <NavigationControl />
           </Map>
-        </div>
+        </Col>
 
-        <div className=''>
-          <h1 className=''>
-            Address Finder
-          </h1>
-          <p className=''>
-            Type a valid CEP number to know exactly the position in the map
-            <br />
-             Ex: 88117750
-          </p>
-          <form
-            action='get'
-            onSubmit={submitHandler}
-            className=''
-          >
-            <div className=''>
-              {/* <label htmlFor='cep' className='leading-7 text-sm text-gray-600'> Type a CEP </label> */}
+        <Col className='p-5'>
+          <h1>Address Finder</h1>
 
-              <input
-                className=''
-                required
-                type='text'
-                name='cep'
-                placeholder='Introduce a CEP'
-                onChange={validateCEP}
-              />
-            </div>
-            <button
-              type='submit'
-              disabled={cepIsValid ? false : true}
-              className=''
-            >
-              🔍
-            </button>
-          </form>
+          <Form onSubmit={submitHandler}>
+            <Form.Label className='pb-4'>
+              Type a valid CEP number to know exactly the position in the map If
+              you don't know what a CEP code is please check this{' '}
+              <a href='https://en.wikipedia.org/wiki/C%C3%B3digo_de_Endere%C3%A7amento_Postal'>
+                article
+              </a>
+             
+            </Form.Label>
+            <Row className='pb-4'>
+              <Col>
+                <Form.Control
+                  required
+                  type='text'
+                  name='cep'
+                  placeholder='Introduce a CEP'
+                  onChange={validateCEP}
+                />
+              </Col>
+              <Col>
+                <Button
+                  className='display-inline'
+                  type='submit'
+                  disabled={cepIsValid ? false : true}
+                >
+                  🔎
+                </Button>
+              </Col>
+            </Row>
+          </Form>
 
           {Object.keys(address).length === 0 ? (
-            <p className=''>The address will apear here ....</p>
+            <p>The address will apear here ....</p>
           ) : (
-            <p className=''>
+            <p>
               {address.street ? address.street : '?'},
               {address.neighborhood ? address.neighborhood : '?'},{' '}
               {address.city}
             </p>
           )}
-        </div>
-      </div>
-    </section>
+        </Col>
+      </Row>
+    </Container>
   )
 }

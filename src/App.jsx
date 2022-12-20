@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <AddressFinder />
-      <CEPFinder />
+      {/* <CEPFinder /> */}
     </>
   )
 }
