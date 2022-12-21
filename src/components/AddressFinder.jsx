@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Map, { Marker, NavigationControl } from 'react-map-gl'
 import axios from 'axios'
 
-import { Container, Row, Col, Form, Button, FormControl } from 'react-bootstrap'
+import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap'
 
 import 'mapbox-gl/dist/mapbox-gl.css'
 
@@ -10,6 +10,7 @@ export default function AddressFinder() {
   const [cep, setCep] = useState('')
   const [cepIsValid, setCepIsValid] = useState(false)
   const [address, setAddress] = useState({})
+  const [showAlert, setShowAlert] = useState(false)
   // Initial map view will focus on Brazil
   const [coordinates, setCoordinates] = useState({
     latitude: -14,
@@ -28,18 +29,19 @@ export default function AddressFinder() {
   const submitHandler = async (e) => {
     e.preventDefault()
 
-    const res = await axios.get(`https://brasilapi.com.br/api/cep/v2/${cep}`)
-    setAddress(res.data)
-
-    // Some CEPs doesn't have specific coordinates
-    if (Object.keys(res.data.location.coordinates).length === 0) {
-      alert('The given CEP does not provides a registered street')
-    } else {
+    try {
+      const res = await axios.get(`https://brasilapi.com.br/api/cep/v2/${cep}`)
+      setAddress(res.data)
       const { latitude, longitude } = res.data.location.coordinates
       setCoordinates({ latitude, longitude, zoom: 17 })
-    }
+      setShowAlert(false)
 
-    console.log(res.data)
+    } catch (err) {
+      setAddress({})
+      setShowAlert(true)
+      // Clearing the input 
+      document.querySelector('.form').reset()
+    }
   }
 
   return (
@@ -62,7 +64,7 @@ export default function AddressFinder() {
         <Col className='p-5'>
           <h1>Address Finder</h1>
 
-          <Form onSubmit={submitHandler}>
+          <Form className='form' onSubmit={submitHandler}>
             <Form.Label className='pb-4'>
               Type a valid CEP number to know exactly the position in the map If
               you don't know what a CEP code is please check this{' '}
@@ -84,7 +86,7 @@ export default function AddressFinder() {
               </Col>
               <Col>
                 <Button
-                  className='display-inline'
+                  className='bg-white'
                   type='submit'
                   disabled={!cepIsValid}
                 >
@@ -95,15 +97,21 @@ export default function AddressFinder() {
           </Form>
 
           {Object.keys(address).length === 0 ? (
-            <p>The address will apear here ....</p>
+            <p>The address will apear here ....</p> 
           ) : (
             <p>
-              {address.street ? address.street : '?'},
+              {address.street ? address.street : '?'},{' '}
               {address.neighborhood ? address.neighborhood : '?'},{' '}
               {address.city}
             </p>
           )}
-        </Col>
+          {showAlert ? <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
+        <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+        <p>
+          The given CEP does not exists 🤷‍♂️. Try again
+        </p>
+      </Alert> : null}
+        </Col>  
       </Row>
     </Container>
   )
