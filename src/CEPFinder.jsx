@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { findAddress } from 'cep-address-finder'
+import { Container, Form, Button, Row, Col, Table, Card } from 'react-bootstrap'
 
 export default function CEPFinder() {
   const [input, setInput] = useState({
@@ -34,158 +35,182 @@ export default function CEPFinder() {
   }
 
   return (
-    <section className=''>
-      <div className=''>
-        <div className=''>
-          <h1 className=''>Don't know your CEP ?</h1>
+    <Container className='mt-3'>
+      <Row className='p-5 mx-auto'>
+        <Col lg={5} className='p-3 border shadow rounded text-center'>
+          <h1 className='pb-5'>Don't know your CEP ?</h1>
 
-          <form onSubmit={handleSubmit} className=''>
-            <div className=''>
-              <label htmlFor='state'>State: </label>
-              <select
-                id='state'
-                name='state'
-                onChange={handleChange}
-                className=''
+          <Form onSubmit={handleSubmit} className=''>
+            <Form.Group as={Row} className='mb-3'>
+              <Form.Label column sm={3} htmlFor='state'>
+                State:
+              </Form.Label>
+              <Col sm={9}>
+                <Form.Select id='state' name='state' onChange={handleChange}>
+                  <option value='AC'>Acre</option>
+                  <option value='AL'>Alagoas</option>
+                  <option value='AP'>Amapá</option>
+                  <option value='AM'>Amazonas</option>
+                  <option value='BA'>Bahia</option>
+                  <option value='CE'>Ceará</option>
+                  <option value='DF'>Distrito Federal</option>
+                  <option value='ES'>Espírito Santo</option>
+                  <option value='GO'>Goiás</option>
+                  <option value='MA'>Maranhão</option>
+                  <option value='MT'>Mato Grosso</option>
+                  <option value='MS'>Mato Grosso do Sul</option>
+                  <option value='MG'>Minas Gerais</option>
+                  <option value='PA'>Pará</option>
+                  <option value='PB'>Paraíba</option>
+                  <option value='PR'>Paraná</option>
+                  <option value='PE'>Pernambuco</option>
+                  <option value='PI'>Piauí</option>
+                  <option value='RJ'>Rio de Janeiro</option>
+                  <option value='RN'>Rio Grande do Norte</option>
+                  <option value='RS'>Rio Grande do Sul</option>
+                  <option value='RO'>Rondônia</option>
+                  <option value='RR'>Roraima</option>
+                  <option value='SC'>Santa Catarina</option>
+                  <option value='SP'>São Paulo</option>
+                  <option value='SE'>Sergipe</option>
+                  <option value='TO'>Tocantins</option>
+                </Form.Select>
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className='mb-3'>
+              <Form.Label column sm={3} htmlFor='city'>
+                City:
+              </Form.Label>
+              <Col sm={9}>
+                <Form.Control
+                  type='text'
+                  name='city'
+                  onChange={handleChange}
+                  required
+                />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className='mb-3'>
+              <Form.Label column sm={3} htmlFor='neighborhood'>
+                Neighborhood
+              </Form.Label>
+              <Col sm={9}>
+                <Form.Control
+                  type='text'
+                  name='neighborhood'
+                  onChange={handleChange}
+                  required
+                />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className='mb-3'>
+              <Form.Label column sm={3} htmlFor='street'>
+                Street:{' '}
+              </Form.Label>
+              <Col sm={9}>
+                <Form.Control
+                  type='text'
+                  name='street'
+                  onChange={handleChange}
+                  required
+                />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className='mb-3'>
+              <Form.Label column sm={3} htmlFor='number'>
+                Number
+              </Form.Label>
+              <Col sm={9}>
+                <Form.Control
+                  type='number'
+                  name='number'
+                  onChange={handleChange}
+                />
+              </Col>
+            </Form.Group>
+
+            <Button type='submit' size='lg'>
+              Find my CEP
+            </Button>
+          </Form>
+        </Col>
+
+        <Col lg={6} className='mx-auto'>
+          {possibleAddresses.length === 0 ? null : (
+            <div>
+              <Card
+                className='rounded border-primary border mx-auto mb-3'
+                style={{ fontSize: '.9rem' }}
               >
-                <option value='AC'>Acre</option>
-                <option value='AL'>Alagoas</option>
-                <option value='AP'>Amapá</option>
-                <option value='AM'>Amazonas</option>
-                <option value='BA'>Bahia</option>
-                <option value='CE'>Ceará</option>
-                <option value='DF'>Distrito Federal</option>
-                <option value='ES'>Espírito Santo</option>
-                <option value='GO'>Goiás</option>
-                <option value='MA'>Maranhão</option>
-                <option value='MT'>Mato Grosso</option>
-                <option value='MS'>Mato Grosso do Sul</option>
-                <option value='MG'>Minas Gerais</option>
-                <option value='PA'>Pará</option>
-                <option value='PB'>Paraíba</option>
-                <option value='PR'>Paraná</option>
-                <option value='PE'>Pernambuco</option>
-                <option value='PI'>Piauí</option>
-                <option value='RJ'>Rio de Janeiro</option>
-                <option value='RN'>Rio Grande do Norte</option>
-                <option value='RS'>Rio Grande do Sul</option>
-                <option value='RO'>Rondônia</option>
-                <option value='RR'>Roraima</option>
-                <option value='SC'>Santa Catarina</option>
-                <option value='SP'>São Paulo</option>
-                <option value='SE'>Sergipe</option>
-                <option value='TO'>Tocantins</option>
-              </select>
+                <Card.Header className='bg-primary text-white'>
+                  ✨ Best match:
+                </Card.Header>
+                <Card.Body className='p-0 m-0'>
+                  <Table className='p-0 m-0'>
+                    <thead>
+                      <tr>
+                        <th>CEP</th>
+                        <th>Street</th>
+                        <th>Neighborhood</th>
+                        <th>City</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{goodAddress.cep}</td>
+                        <td>{goodAddress.street}</td>
+                        <td>{goodAddress.neighborhood}</td>
+                        <td>{goodAddress.city}</td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                </Card.Body>
+              </Card>
+              {possibleAddresses.length === 1 ? null : (
+                <Card
+                  className='rounded border-gray border mx-auto'
+                  style={{ fontSize: '.9rem' }}
+                >
+                  <Card.Header className='bg-gray '>
+                    🔎 Others similar:
+                  </Card.Header>
+                  <Card.Body className='p-0 m-0'>
+                    <Table bordered hover className='m-0 p-0'>
+                      <thead>
+                        <tr>
+                          <th scope='col'>CEP</th>
+                          <th scope='col'>Street</th>
+                          <th scope='col'>Neighborhood</th>
+                          <th scope='col'>City</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        {possibleAddresses.map((address, i) => {
+                          if (i > 6) null
+                          else
+                            return (
+                              <tr key={i}>
+                                <td scope='col'>{address.cep}</td>
+                                <td scope='col'>{address.street}</td>
+                                <td scope='col'>{address.neighborhood}</td>
+                                <td scope='col'>{address.city}</td>
+                              </tr>
+                            )
+                        })}
+                      </tbody>
+                    </Table>
+                  </Card.Body>
+                </Card>
+              )}
             </div>
-
-            <div className=''>
-              <label htmlFor='city'>City: </label>
-              <input
-                type='text'
-                name='city'
-                onChange={handleChange}
-                required
-                className=''
-              />
-            </div>
-
-            <div className=''>
-              <label htmlFor='neighborhood'>Neighborhood</label>
-              <input
-                type='text'
-                name='neighborhood'
-                onChange={handleChange}
-                required
-                className=''
-              />
-            </div>
-
-            <div className=''>
-              <label htmlFor='street'>Street: </label>
-              <input
-                type='text'
-                name='street'
-                onChange={handleChange}
-                required
-                className=''
-              />
-            </div>
-
-            <div className=''>
-              <label htmlFor='number'>Number</label>
-              <input
-                type='number'
-                name='number'
-                onChange={handleChange}
-                className=''
-              />
-            </div>
-
-            <input type='submit' value='Find my CEP' className='' />
-          </form>
-        </div>
-
-        {possibleAddresses.length === 0 ? (
-          <div className='w-1/2'></div>
-        ) : (
-          <div className=''>
-            <h2 className=''>✨ Best match:</h2>
-            <p>CEP: {goodAddress.cep}</p>
-            <p>Street: {goodAddress.street}</p>
-            <p>Neighborhood: {goodAddress.neighborhood}</p>
-            <p>City: {goodAddress.city}</p>
-
-            {possibleAddresses.length === 1 ? (
-              <p></p>
-            ) : (
-              <div className=''>
-                <h3 className=''>🔎 Others similar:</h3>
-                <table className=''>
-                  <thead className=''>
-                    <tr>
-                      <th scope='col' className=''>
-                        CEP
-                      </th>
-                      <th scope='col' className=''>
-                        Street
-                      </th>
-                      <th scope='col' className=''>
-                        Neighborhood
-                      </th>
-                      <th scope='col' className=''>
-                        City
-                      </th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    {possibleAddresses.map((address, i) => {
-                      if (i > 10) null
-                      else
-                        return (
-                          <tr key={i} className=''>
-                            <td scope='col' className=''>
-                              {address.cep}
-                            </td>
-                            <td scope='col' className=''>
-                              {address.street}
-                            </td>
-                            <td scope='col' className=''>
-                              {address.neighborhood}
-                            </td>
-                            <td scope='col' className=''>
-                              {address.city}
-                            </td>
-                          </tr>
-                        )
-                    })}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </div>
-        )}
-      </div>
-    </section>
+          )}
+        </Col>
+      </Row>
+    </Container>
   )
 }
