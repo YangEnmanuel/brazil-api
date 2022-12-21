@@ -2,14 +2,18 @@ import { Nav, Navbar, Container } from 'react-bootstrap'
 
 export default function NavBar() {
   return (
-  <Navbar bg="light" variant="light">
+    <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
     <Container>
       <Navbar.Brand href="#">Brasil Tools 🔨</Navbar.Brand>
-      <Nav className="">
-        <Nav.Link href="#home">Home</Nav.Link>
-        <Nav.Link href="#features">Find your address</Nav.Link>
-        <Nav.Link href="#pricing">CEP Finder</Nav.Link>
-      </Nav>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="me-auto">
+        </Nav>
+        <Nav className="">
+          <Nav.Link href="#">Address Finder</Nav.Link>
+          <Nav.Link href="#">CEP Finder</Nav.Link>
+        </Nav>
+      </Navbar.Collapse>
     </Container>
   </Navbar>
   )
