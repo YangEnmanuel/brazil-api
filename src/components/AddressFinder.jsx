@@ -19,7 +19,7 @@ export default function AddressFinder() {
 
   const validateCEP = (e) => {
     // The CEP must be 8 digits
-    const isValid = /^[0-9]{8}$/g.test(e.target.value)
+    const isValid = /^[0-9]{5}-[0-9]{3}$/g.test(e.target.value)
 
     isValid ? setCepIsValid(true) : setCepIsValid(false)
     setCep(e.target.value)
@@ -74,10 +74,11 @@ export default function AddressFinder() {
             <Row className='pb-4'>
               <Col>
                 <Form.Control
+                isInvalid={!cepIsValid}
                   required
                   type='text'
                   name='cep'
-                  placeholder='Introduce a CEP'
+                  placeholder='Ex: #####-###'
                   onChange={validateCEP}
                 />
               </Col>
@@ -85,7 +86,7 @@ export default function AddressFinder() {
                 <Button
                   className='display-inline'
                   type='submit'
-                  disabled={cepIsValid ? false : true}
+                  disabled={!cepIsValid}
                 >
                   🔎
                 </Button>
