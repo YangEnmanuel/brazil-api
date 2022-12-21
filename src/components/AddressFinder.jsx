@@ -46,7 +46,7 @@ export default function AddressFinder() {
 
   return (
     <Container>
-      <Row className='align-items-center p-5'>
+      <Row className='align-items-center p-5 mt-4'>
         <Col style={{ width: '500px', height: '500px' }}>
           <Map
             {...coordinates}
