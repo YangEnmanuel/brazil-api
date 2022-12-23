@@ -33,7 +33,7 @@ export default function AddressFinder() {
       const res = await axios.get(`https://brasilapi.com.br/api/cep/v2/${cep}`)
       setAddress(res.data)
       const { latitude, longitude } = res.data.location.coordinates
-      setCoordinates({ latitude, longitude, zoom: 17 })
+      setCoordinates({ latitude, longitude, zoom: 15 })
       setShowAlert(false)
 
     } catch (err) {
@@ -54,7 +54,7 @@ export default function AddressFinder() {
             mapboxAccessToken='pk.eyJ1IjoieWFuZ2VubWFudWVsIiwiYSI6ImNsYTg1YWdnMjAwZmszdm80NmV5cnU5YmoifQ.5rV6ex-488rO_XW8eWFujw'
             mapStyle='mapbox://styles/mapbox/streets-v9'
           >
-            {Object.keys(address).length === 0 ? null : (
+          {Object.keys(address).length === 0 ? null : (
               <Marker {...coordinates} anchor='bottom'></Marker>
             )}
             <NavigationControl />
