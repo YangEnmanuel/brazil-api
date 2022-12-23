@@ -50,14 +50,12 @@ export default function AddressFinder() {
         <Col style={{ width: '500px', height: '500px' }}>
           <Map
             {...coordinates}
-            onMove={(e) => setCoordinates(e.viewState)}
             mapboxAccessToken='pk.eyJ1IjoieWFuZ2VubWFudWVsIiwiYSI6ImNsYTg1YWdnMjAwZmszdm80NmV5cnU5YmoifQ.5rV6ex-488rO_XW8eWFujw'
             mapStyle='mapbox://styles/mapbox/streets-v9'
           >
           {Object.keys(address).length === 0 ? null : (
               <Marker {...coordinates} anchor='bottom'></Marker>
             )}
-            <NavigationControl />
           </Map>
         </Col>
 
