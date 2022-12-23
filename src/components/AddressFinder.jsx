@@ -66,17 +66,18 @@ export default function AddressFinder() {
 
           <Form className='form' onSubmit={submitHandler}>
             <Form.Label className='pb-4'>
-              Type a valid CEP number to know exactly the position in the map If
-              you don't know what a CEP code is please check this{' '}
+              Type a valid CEP number to know exactly the position in the map. If
+              you don't know what does this means is please check this{' '}
               <a href='https://en.wikipedia.org/wiki/C%C3%B3digo_de_Endere%C3%A7amento_Postal'>
                 article
               </a>
+              <p>Don't know what your CEP is?</p>
              
             </Form.Label>
             <Row className='pb-4'>
               <Col>
                 <Form.Control
-                isInvalid={!cepIsValid}
+                isInvalid={!cepIsValid && !cep.length == 0}
                   required
                   type='text'
                   name='cep'
