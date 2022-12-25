@@ -35,11 +35,10 @@ export default function AddressFinder() {
       const { latitude, longitude } = res.data.location.coordinates
       setCoordinates({ latitude, longitude, zoom: 15 })
       setShowAlert(false)
-
     } catch (err) {
       setAddress({})
       setShowAlert(true)
-      // Clearing the input 
+      // Clearing the input
       document.querySelector('.form').reset()
     }
   }
@@ -53,7 +52,7 @@ export default function AddressFinder() {
             mapboxAccessToken='pk.eyJ1IjoieWFuZ2VubWFudWVsIiwiYSI6ImNsYTg1YWdnMjAwZmszdm80NmV5cnU5YmoifQ.5rV6ex-488rO_XW8eWFujw'
             mapStyle='mapbox://styles/mapbox/streets-v9'
           >
-          {Object.keys(address).length === 0 ? null : (
+            {Object.keys(address).length === 0 ? null : (
               <Marker {...coordinates} anchor='bottom'></Marker>
             )}
           </Map>
@@ -64,18 +63,25 @@ export default function AddressFinder() {
 
           <Form className='form' onSubmit={submitHandler}>
             <Form.Label className='pb-4'>
-              Type a valid CEP number to know exactly the position in the map. If
-              you don't know what does this means is please check this{' '}
+              Type a valid CEP number to know exactly the position in the map.
+              If you don't know what does this means is please check this{' '}
               <a href='https://en.wikipedia.org/wiki/C%C3%B3digo_de_Endere%C3%A7amento_Postal'>
                 article
               </a>
-              <p>Don't know what your CEP is?</p>
-             
+              <p>
+                Don't know what your CEP is?{' '}
+                <a
+                  onClick={() => window.scrollTo(0, document.body.scrollHeight)}
+                  href='#bottom'
+                >
+                  Check it out!
+                </a>
+              </p>
             </Form.Label>
             <Row className='pb-4'>
               <Col>
                 <Form.Control
-                isInvalid={!cepIsValid && !cep.length == 0}
+                  isInvalid={!cepIsValid && !cep.length == 0}
                   required
                   type='text'
                   name='cep'
@@ -96,7 +102,7 @@ export default function AddressFinder() {
           </Form>
 
           {Object.keys(address).length === 0 ? (
-            <p>The address will apear here ....</p> 
+            <p>The address will apear here ....</p>
           ) : (
             <p>
               {address.street ? address.street : '?'},{' '}
@@ -104,13 +110,17 @@ export default function AddressFinder() {
               {address.city}
             </p>
           )}
-          {showAlert ? <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
-        <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-        <p>
-          The given CEP does not exists 🤷‍♂️. Try again
-        </p>
-      </Alert> : null}
-        </Col>  
+          {showAlert ? (
+            <Alert
+              variant='danger'
+              onClose={() => setShowAlert(false)}
+              dismissible
+            >
+              <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+              <p>The given CEP does not exists 🤷‍♂️. Try again</p>
+            </Alert>
+          ) : null}
+        </Col>
       </Row>
     </Container>
   )
