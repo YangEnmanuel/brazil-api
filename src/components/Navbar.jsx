@@ -14,7 +14,9 @@ export default function NavBar() {
         <Navbar.Collapse id='responsive-navbar-nav'>
           <Nav className='me-auto'>
             <Nav.Link href='#top'>Address Finder</Nav.Link>
-            <Nav.Link href='#' onClick={goBottom}>CEP Finder</Nav.Link>
+            <Nav.Link href='#' onClick={goBottom}>
+              CEP Finder
+            </Nav.Link>
           </Nav>
           <Nav className=''>
             <Nav.Link
