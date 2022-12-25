@@ -3,7 +3,16 @@ import Map, { Marker, NavigationControl } from 'react-map-gl'
 import axios from 'axios'
 import img from '../assets/google-maps.png'
 
-import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap'
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  Button,
+  Alert,
+  OverlayTrigger,
+  Tooltip,
+} from 'react-bootstrap'
 
 import 'mapbox-gl/dist/mapbox-gl.css'
 
@@ -106,14 +115,17 @@ export default function AddressFinder() {
             <p>The address will apear here ....</p>
           ) : (
             <div className='d-flex align-items-center'>
-              <p>
+              <OverlayTrigger
+                placement='bottom'
+                overlay={<Tooltip>Open on Google Maps!</Tooltip>}
+              >
                 <a
-                  className='mx-1'
-
                   href={`https://www.google.com/maps/@${coordinates.latitude},${coordinates.longitude},18.89z`}
                 >
-                  <img src={img} height={30} alt='Open on Goolge' />
+                  <img src={img} height={30} alt='Open on Google' />
                 </a>
+              </OverlayTrigger>
+              <p className='mt-3'>
                 {address.street ? address.street : '?'},{' '}
                 {address.neighborhood ? address.neighborhood : '?'},{' '}
                 {address.city}
