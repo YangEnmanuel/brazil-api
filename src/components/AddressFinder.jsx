@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Map, { Marker, NavigationControl } from 'react-map-gl'
 import axios from 'axios'
+import img from '../assets/google-maps.png'
 
 import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap'
 
@@ -104,11 +105,20 @@ export default function AddressFinder() {
           {Object.keys(address).length === 0 ? (
             <p>The address will apear here ....</p>
           ) : (
-            <p>
-              {address.street ? address.street : '?'},{' '}
-              {address.neighborhood ? address.neighborhood : '?'},{' '}
-              {address.city}
-            </p>
+            <div className='d-flex align-items-center'>
+              <p>
+                <a
+                  className='mx-1'
+
+                  href={`https://www.google.com/maps/@${coordinates.latitude},${coordinates.longitude},18.89z`}
+                >
+                  <img src={img} height={30} alt='Open on Goolge' />
+                </a>
+                {address.street ? address.street : '?'},{' '}
+                {address.neighborhood ? address.neighborhood : '?'},{' '}
+                {address.city}
+              </p>
+            </div>
           )}
           {showAlert ? (
             <Alert
