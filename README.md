@@ -12,7 +12,7 @@ Features:
 ....
 
 Working on: 
-- Moving from MapBox Gl to Google Maps 🗺️📌
+- Responsive Design 📲💅
 
 
 Built with a lot of 💓 with React⚛️ 
