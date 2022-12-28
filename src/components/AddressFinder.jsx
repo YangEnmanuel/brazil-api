@@ -78,15 +78,7 @@ export default function AddressFinder() {
               <a href='https://en.wikipedia.org/wiki/C%C3%B3digo_de_Endere%C3%A7amento_Postal'>
                 article
               </a>
-              <p>
-                Don't know what your CEP is?{' '}
-                <a
-                  onClick={() => window.scrollTo(0, document.body.scrollHeight)}
-                  href='#bottom'
-                >
-                  Check it out!
-                </a>
-              </p>
+  
             </Form.Label>
             <Row className='pb-4'>
               <Col>
