@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Map, { Marker, NavigationControl } from 'react-map-gl'
+import Map, { Marker } from 'react-map-gl'
 import axios from 'axios'
 import img from '../assets/google-maps.png'
 
@@ -11,12 +11,12 @@ import {
   Button,
   Alert,
   OverlayTrigger,
-  Tooltip,
+  Tooltip
 } from 'react-bootstrap'
 
 import 'mapbox-gl/dist/mapbox-gl.css'
 
-export default function AddressFinder() {
+export default function AddressFinder () {
   const [cep, setCep] = useState('')
   const [cepIsValid, setCepIsValid] = useState(false)
   const [address, setAddress] = useState({})
@@ -25,7 +25,7 @@ export default function AddressFinder() {
   const [coordinates, setCoordinates] = useState({
     latitude: -14,
     longitude: -50,
-    zoom: 3,
+    zoom: 3
   })
 
   const validateCEP = (e) => {
@@ -54,7 +54,7 @@ export default function AddressFinder() {
   }
 
   return (
-    <Container>
+   <Container>
       <Row className='align-items-center p-5 mt-4'>
         <Col style={{ width: '500px', height: '500px' }}>
           <Map
@@ -62,9 +62,9 @@ export default function AddressFinder() {
             mapboxAccessToken='pk.eyJ1IjoieWFuZ2VubWFudWVsIiwiYSI6ImNsYTg1YWdnMjAwZmszdm80NmV5cnU5YmoifQ.5rV6ex-488rO_XW8eWFujw'
             mapStyle='mapbox://styles/mapbox/streets-v9'
           >
-            {Object.keys(address).length === 0 ? null : (
+            {Object.keys(address).length !== 0 &&
               <Marker {...coordinates} anchor='bottom'></Marker>
-            )}
+            }
           </Map>
         </Col>
 
@@ -74,16 +74,16 @@ export default function AddressFinder() {
           <Form className='form' onSubmit={submitHandler}>
             <Form.Label className='pb-4'>
               Type a valid CEP number to know exactly the position in the map.
-              If you don't know what does this means is please check this{' '}
+              If you don`t know what does this means is please check this{' '}
               <a href='https://en.wikipedia.org/wiki/C%C3%B3digo_de_Endere%C3%A7amento_Postal'>
                 article
               </a>
-  
+
             </Form.Label>
             <Row className='pb-4'>
               <Col>
                 <Form.Control
-                  isInvalid={!cepIsValid && !cep.length == 0}
+                  isInvalid={!cepIsValid && !cep.length === 0}
                   required
                   type='text'
                   name='cep'
@@ -103,9 +103,9 @@ export default function AddressFinder() {
             </Row>
           </Form>
 
-          {Object.keys(address).length === 0 ? (
-            <p>The address will apear here ....</p>
-          ) : (
+          {Object.keys(address).length === 0
+            ? <p>The address will apear here ....</p>
+            : (
             <div className='d-flex align-items-center'>
               <OverlayTrigger
                 placement='bottom'
@@ -123,9 +123,8 @@ export default function AddressFinder() {
                 {address.city}
               </p>
             </div>
-          )}
-          {showAlert ? (
-            <Alert
+              )}
+          {showAlert && <Alert
               variant='danger'
               onClose={() => setShowAlert(false)}
               dismissible
@@ -133,7 +132,7 @@ export default function AddressFinder() {
               <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
               <p>The given CEP does not exists 🤷‍♂️. Try again</p>
             </Alert>
-          ) : null}
+            }
         </Col>
       </Row>
     </Container>

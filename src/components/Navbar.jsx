@@ -1,11 +1,12 @@
-import { Nav, Navbar, Container, Image } from 'react-bootstrap'
+import React from 'react'
+import { Nav, Navbar, Container } from 'react-bootstrap'
 import imgUrl from '../assets/icons8-github-64.png'
 
 const goBottom = () => {
   window.scrollTo(0, document.body.scrollHeight)
 }
 
-export default function NavBar() {
+export default function NavBar () {
   return (
     <Navbar fixed='top' collapseOnSelect expand='lg' bg='light' variant='light'>
       <Container>

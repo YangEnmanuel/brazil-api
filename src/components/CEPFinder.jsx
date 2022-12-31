@@ -1,13 +1,13 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { findAddress } from 'cep-address-finder'
 import { Container, Form, Button, Row, Col, Table, Card } from 'react-bootstrap'
 
-export default function CEPFinder() {
+export default function CEPFinder () {
   const [input, setInput] = useState({
     state: '',
     city: '',
     neighborhood: '',
-    number: '',
+    number: ''
   })
   const [possibleAddresses, setPossibleAddresses] = useState([])
   const [goodAddress, setGoodAddress] = useState({})
@@ -16,7 +16,7 @@ export default function CEPFinder() {
     e.preventDefault()
 
     const { addresses, selectedAddress } = await findAddress(input)
-    console.log(selectedAddress, addresses)
+    // console.log(selectedAddress, addresses)
 
     setGoodAddress(selectedAddress)
     setPossibleAddresses(addresses)
@@ -24,21 +24,17 @@ export default function CEPFinder() {
 
   const handleChange = (e) => {
     if (e.target.name === 'state') setInput({ ...input, state: e.target.value })
-    else if (e.target.name === 'city')
-      setInput({ ...input, city: e.target.value })
-    else if (e.target.name === 'street')
-      setInput({ ...input, street: e.target.value })
-    else if (e.target.name === 'neighborhood')
-      setInput({ ...input, neighborhood: e.target.value })
-    else if (e.target.name === 'number')
-      setInput({ ...input, number: e.target.value })
+    else if (e.target.name === 'city') setInput({ ...input, city: e.target.value })
+    else if (e.target.name === 'street') setInput({ ...input, street: e.target.value })
+    else if (e.target.name === 'neighborhood') setInput({ ...input, neighborhood: e.target.value })
+    else if (e.target.name === 'number') setInput({ ...input, number: e.target.value })
   }
 
   return (
     <Container className='mt-0 mb-5 pb-5'>
       <Row className='p-5 mx-auto'>
         <Col lg={5} className='p-3 border shadow rounded text-center'>
-          <h1 className='pb-5'>Don't know your CEP ?</h1>
+          <h1 className='pb-5'>Don`t know your CEP ?</h1>
 
           <Form onSubmit={handleSubmit} className=''>
             <Form.Group as={Row} className='mb-3'>
@@ -140,7 +136,7 @@ export default function CEPFinder() {
         </Col>
 
         <Col lg={6} className='mx-auto'>
-          {possibleAddresses.length === 0 ? null : (
+          {possibleAddresses.length !== 0 &&
             <div>
               <Card
                 className='rounded border-primary border mx-auto mb-3'
@@ -170,7 +166,7 @@ export default function CEPFinder() {
                   </Table>
                 </Card.Body>
               </Card>
-              {possibleAddresses.length === 1 ? null : (
+              {possibleAddresses.length !== 1 &&
                 <Card
                   className='rounded border-gray border mx-auto'
                   style={{ fontSize: '.9rem' }}
@@ -190,9 +186,9 @@ export default function CEPFinder() {
                       </thead>
 
                       <tbody>
+                        {/*  eslint-disable-next-line array-callback-return */}
                         {possibleAddresses.map((address, i) => {
-                          if (i > 6) null
-                          else
+                          if (!(i > 6)) {
                             return (
                               <tr key={i}>
                                 <td scope='col'>{address.cep}</td>
@@ -201,14 +197,16 @@ export default function CEPFinder() {
                                 <td scope='col'>{address.city}</td>
                               </tr>
                             )
+                          }
+                          console.log(address, i)
                         })}
                       </tbody>
                     </Table>
                   </Card.Body>
                 </Card>
-              )}
+              }
             </div>
-          )}
+          }
         </Col>
       </Row>
     </Container>
